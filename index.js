@@ -70,8 +70,8 @@ function init() {
     // pull json
     $.ajax({
       url: 'resources/Northern_Ireland_Jan2021_latlon.json',
-      dataType: 'jsonp',
-      jsonpCallback: 'jsonFlickrFeed',
+//      dataType: 'jsonp',
+//      jsonpCallback: 'jsonFlickrFeed',
       success: successHandler,
       error: function () {
         alert("error");
