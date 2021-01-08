@@ -72,7 +72,7 @@ function init() {
       url: 'resources/Northern_Ireland_Jan2021_latlon.json',
       dataType: 'jsonp',
       jsonpCallback: 'jsonFlickrFeed',
-      success: successHandler
+      success: successHandler,
       error: function () {
         alert("error");
       },
