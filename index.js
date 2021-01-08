@@ -3,20 +3,28 @@ var overlay;
 
 // when jQuery has loaded the data, we can create features for each photo
 function successHandler(data) {
+
+  alert ("1")
+
   // we need to transform the geometries into the view's projection
-  var transform = ol.proj.getTransform('EPSG:4326', 'EPSG:3857');
+//  var transform = ol.proj.getTransform('EPSG:4326', 'EPSG:3857');
+
   // loop over the items in the response
   data.items.forEach(function(item) {
+
     // create a new feature with the item as the properties
     var feature = new ol.Feature(item);
     // add a url property for later ease of access
 //    feature.set('url', item.media.m);
     // create an appropriate geometry and add it to the feature
-    var coordinate = transform([parseFloat(item.lon), parseFloat(item.lat)]);
-    var geometry = new ol.geom.Point(coordinate);
-    feature.setGeometry(geometry);
-    // add the feature to the source
-    overlay.addFeature(feature);
+
+    var myLocation = new OpenLayers.Geometry.Point(parseFloat(item.lon), parseFloat(item.lat)).transform('EPSG:4326', 'EPSG:3857');
+
+    overlay.addFeatures([
+        new OpenLayers.Feature.Vector(myLocation, {tooltip: 'OpenLayers'})
+    ]);
+
+
   });
 }
 
