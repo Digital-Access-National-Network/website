@@ -77,7 +77,7 @@ function init() {
         alert("error");
       },
       complete: function () {
-        alert("ajax completed " + cartObject.productID);
+        alert("ajax completed ");
       }
     });
 }
