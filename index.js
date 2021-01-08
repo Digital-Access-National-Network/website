@@ -10,7 +10,7 @@ function successHandler(data) {
 //  var transform = ol.proj.getTransform('EPSG:4326', 'EPSG:3857');
 
   // loop over the items in the response
-  data.items.forEach(function(item) {
+  data.forEach(function(item) {
 
     // create a new feature with the item as the properties
     var feature = new ol.Feature(item);
