@@ -73,5 +73,11 @@ function init() {
       dataType: 'jsonp',
       jsonpCallback: 'jsonFlickrFeed',
       success: successHandler
+      error: function () {
+        alert("error");
+      },
+      complete: function () {
+        alert("ajax completed " + cartObject.productID);
+      }
     });
 }
