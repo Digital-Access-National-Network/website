@@ -13,7 +13,7 @@ function successHandler(data) {
   data.forEach(function(item) {
 
     // create a new feature with the item as the properties
-    var feature = new ol.Feature(item);
+    var feature = new OpenLayers.Feature(item);
     // add a url property for later ease of access
 //    feature.set('url', item.media.m);
     // create an appropriate geometry and add it to the feature
