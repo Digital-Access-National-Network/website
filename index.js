@@ -162,7 +162,8 @@ function initMap() {
         address = evt.address;
 
       _homeLocation = coord;
-      _overlay.setPosition(_homeLocation);
+
+      _map.getView().setCenter(_homeLocation);
     })
 
     updateFeatures();
