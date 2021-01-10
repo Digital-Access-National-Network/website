@@ -18,12 +18,6 @@ var _mercatorProj = new ol.proj.Projection("EPSG:900913");
 //
 function distanceBetweenPointsMiles(p1Map, p2Map){
 
-  // todo: Could use
-  // var sourceProj = map.getView().getProjection();
-
-  var p1 = p1Map.transform(_mapProj, _geographicProj);
-  var p2 = p2Map.transform(_mapProj, _geographicProj);
-
   return ol.sphere.getDistance(p1, p2) * 0.000621371;
 }
 
@@ -46,7 +40,7 @@ function jsonSuccessHandler(data) {
 
 //    console.debug(item)
 
-    var thisLocation = new ol.geom.Point(parseFloat(item.LON), parseFloat(item.LAT)).transform('EPSG:4326', 'EPSG:3857');
+    var thisLocation = new ol.geom.Point(parseFloat(item.LON), parseFloat(item.LAT));
 
 //    console.debug(thisLocation);
     var distanceMiles = distanceBetweenPointsMiles(_homeLocation, thisLocation);
@@ -132,20 +126,19 @@ function updateFeatures() {
 
 function initMap() {
 
-    // The location of our marker and popup. We usually think in geographic
-    // coordinates ('EPSG:4326'), but the map is projected ('EPSG:3857').
+    // The location of our marker and popup. Coordinates ('EPSG:4326') (?)
     _homeLocation = new ol.geom.Point(-2.986221, 53.413420)
-        .transform('EPSG:4326', 'EPSG:3857');
 
     // Create the map
     _map = new ol.Map({
-        target: "map", projection: "EPSG:3857",
+        target: "map",
         layers: [
           new ol.layer.Tile({
             source: new ol.source.OSM()
           })
         ],
         view: new ol.View({
+          projection: "EPSG:4326",
           center: _homeLocation,
           zoom: 6
         })
