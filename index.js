@@ -1,13 +1,3 @@
-import 'ol/ol.css';
-
-import Map from 'ol/Map';
-import OSM from 'ol/source/OSM';
-import Projection from 'ol/Projection';
-import Feature from 'ol/Feature';
-import Geometry from 'ol/geom/Geometry';
-import TileLayer from 'ol/layer/Tile';
-//import StyleMap form 
-
 var _map;
 var _overlay;
 
@@ -18,9 +8,9 @@ var _englandSchoolData;
 var _homeLocation;
 var _maxDistanceMiles = 20;
 
-var _geographicProj  = new Projection("EPSG:4326");
-var _mapProj  = new Projection("EPSG:3857");
-var _mercatorProj = new Projection("EPSG:900913");
+var _geographicProj  = new ol.Projection("EPSG:4326");
+var _mapProj  = new ol.Projection("EPSG:3857");
+var _mercatorProj = new ol.Projection("EPSG:900913");
 
 // Find distance between two points on the map
 //
