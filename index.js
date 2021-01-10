@@ -1,7 +1,5 @@
-    console.debug(item);
-
-var map;
-var overlay;
+var _map;
+var _overlay;
 
 var _niSchoolData;
 var _scotlandSchoolData;
@@ -38,7 +36,7 @@ function jsonSuccessHandler(data, target) {
     else if( "School Name" in item )
       tiptext = item["School Name"];
 
-    overlay.addFeatures([
+    _overlay.addFeatures([
         new OpenLayers.Feature.Vector(myLocation, {tooltip: tiptext})
     ]);
 
@@ -49,7 +47,7 @@ function jsonSuccessHandler(data, target) {
 function init() {
 
     // The overlay layer for our marker, with a simple diamond as symbol
-    overlay = new OpenLayers.Layer.Vector('Overlay', {
+    _overlay = new OpenLayers.Layer.Vector('Overlay', {
         styleMap: new OpenLayers.StyleMap({
             externalGraphic: 'img/marker.png',
             graphicWidth: 20, graphicHeight: 24, graphicYOffset: -24,
@@ -63,7 +61,7 @@ function init() {
         .transform('EPSG:4326', 'EPSG:3857');
 
     // We add the marker with a tooltip text to the overlay
-    overlay.addFeatures([
+    _overlay.addFeatures([
         new OpenLayers.Feature.Vector(myLocation, {tooltip: 'OpenLayers'})
     ]);
 
@@ -76,9 +74,9 @@ function init() {
     );
 
     // Finally we create the map
-    map = new OpenLayers.Map({
+    _map = new OpenLayers.Map({
         div: "map", projection: "EPSG:3857",
-        layers: [new OpenLayers.Layer.OSM(), overlay],
+        layers: [new OpenLayers.Layer.OSM(), _overlay],
         center: myLocation.getBounds().getCenterLonLat(), zoom: 6
     });
 
