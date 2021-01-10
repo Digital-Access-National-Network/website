@@ -125,8 +125,8 @@ function updateFeatures() {
 
 function initMap() {
 
-    // The location of our marker and popup. Coordinates ('EPSG:4326') (?)
-    _homeLocation = new ol.geom.Point(-2.986221, 53.413420)
+    // The location of our marker and popup. Coordinates ('EPSG:4326')
+    _homeLocation = [-2.986221, 53.413420];
 
     // Create the map
     _map = new ol.Map({
@@ -138,7 +138,7 @@ function initMap() {
         ],
         view: new ol.View({
           projection: "EPSG:3857",
-          center: ol.proj.fromLonLat([37.41, 8.82]),
+          center: ol.proj.fromLonLat(_homeLocation),
           zoom: 6
         })
     });
