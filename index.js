@@ -41,7 +41,7 @@ function jsonSuccessHandler(data) {
 
     var distanceMiles = distanceBetweenPointsMiles(_homeLocation, [ item.LON, item.LAT] );
 
-    console.debug(distanceMiles);
+//    console.debug(distanceMiles);
 
     if(distanceMiles < _maxDistanceMiles) {
       var tiptext = ""
