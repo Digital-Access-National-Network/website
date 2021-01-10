@@ -167,6 +167,7 @@ var displayFeatureInfo = function (pixel) {
     if (features.length) {
       feature.set('hover',true);
       feature.setStyle(styleFunction);
+      _highlighted = feature;
     } else {
       if(_highlighted != null) {
         _highlighted.set('hover',false);
