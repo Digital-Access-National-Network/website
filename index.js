@@ -67,7 +67,7 @@ function jsonSuccessHandler(data) {
 
 function updateFeatures() {
 
-    _overlay.getFeatures().clear();
+    _overlay.clear();
 
     // pull json for NI
     $.ajax({
