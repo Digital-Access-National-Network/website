@@ -159,13 +159,20 @@ function updateFeatures() {
     });
 }
 
+var _highlighted;
+
 var displayFeatureInfo = function (pixel) {
     _overlay.getFeatures(pixel).then(function (features) {
     var feature = features.length ? features[0] : undefined;
     if (features.length) {
-      console.debug(feature.get('name'));
+      feature.set('hover',true);
+      feature.setStyle(styleFunction);
     } else {
-      console.debug("nothing");
+      if(_highlighted != null) {
+        _highlighted.set('hover',false);
+        _highlighted.setStyle(styleFunction);
+      }
+      _highlighted = nulll;
     }
   });
 }
