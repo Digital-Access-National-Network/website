@@ -20,6 +20,30 @@ function distanceBetweenPointsMiles(p1, p2){
   return ol.sphere.getDistance(p1, p2) * 0.000621371;
 }
 
+function styleFunction() {
+  return [
+    new ol.style.Style({
+        fill: new ol.style.Fill({
+        color: 'rgba(255,255,255,0.4)'
+      }),
+      stroke: new ol.style.Stroke({
+        color: '#3399CC',
+        width: 1.25
+      }),
+      text: new ol.style.Text({
+        font: '12px Calibri,sans-serif',
+        fill: new ol.style.Fill({ color: '#000' }),
+        stroke: new ol.style.Stroke({
+          color: '#fff', width: 2
+        }),
+        // get the text from the feature - `this` is ol.Feature
+        // and show only under certain resolution
+        text: _map.getView().getZoom() > 12 ? this.get('description') : ''
+      })
+    })
+  ];
+}
+
 // when jQuery has loaded the data, we can create features for each photo
 function jsonSuccessHandler(data) {
 
@@ -57,7 +81,8 @@ function jsonSuccessHandler(data) {
 
       var marker = new ol.Feature({
         geometry: new ol.geom.Point(ol.proj.transform([item.LON, item.LAT], 'EPSG:4326', 'EPSG:3857')),
-        label: tiptext
+        description: tiptext,
+        style: styleFunction
       });
 
       _overlay.getSource().addFeature(marker);
