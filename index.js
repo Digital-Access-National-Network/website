@@ -198,10 +198,6 @@ function initMap() {
       displayFeatureInfo(pixel);
     });
 
-map.on('click', function (evt) {
-  displayFeatureInfo(evt.pixel);
-});
-
     var geocoder = new Geocoder('nominatim', {
       provider: 'osm', //change it here
       lang: 'en-GB',
