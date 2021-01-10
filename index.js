@@ -28,7 +28,7 @@ function jsonSuccessHandler(data) {
   // we need to transform the geometries into the view's projection
 //  var transform = ol.proj.getTransform('EPSG:4326', 'EPSG:3857');
 
-  var homePoint = ol.geom.Point( _homeLocation );
+  var homePoint = new ol.geom.Point( _homeLocation );
 
   // loop over the items in the response
   data.forEach(function(item) {
