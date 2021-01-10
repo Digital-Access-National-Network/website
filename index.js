@@ -67,7 +67,21 @@ function jsonSuccessHandler(data) {
 
 function updateFeatures() {
 
-    _overlay.clear();
+    // The overlay layer for our marker, with a simple diamond as symbol
+    _overlay = new OpenLayers.Layer.Vector('Overlay', {
+        styleMap: new OpenLayers.StyleMap({
+            externalGraphic: 'img/marker.png',
+            graphicWidth: 20, graphicHeight: 24, graphicYOffset: -24,
+            title: '${tooltip}'
+        })
+    });
+
+    // We add the marker with a tooltip text to the overlay
+    _overlay.addFeatures([
+        new OpenLayers.Feature.Vector(_homeLocation, {tooltip: 'You are here'})
+    ]);
+
+    // TODO: Are these resources cached? Hope so...
 
     // pull json for NI
     $.ajax({
@@ -80,6 +94,8 @@ function updateFeatures() {
       complete: function () {
       }
     });
+
+    _map.addLayer(_overlay);
 
     // pull json for Scotland
     $.ajax({
@@ -107,45 +123,19 @@ function updateFeatures() {
 
 function initMap() {
 
-    // The overlay layer for our marker, with a simple diamond as symbol
-    _overlay = new OpenLayers.Layer.Vector('Overlay', {
-        styleMap: new OpenLayers.StyleMap({
-            externalGraphic: 'img/marker.png',
-            graphicWidth: 20, graphicHeight: 24, graphicYOffset: -24,
-            title: '${tooltip}'
-        })
-    });
-
     // The location of our marker and popup. We usually think in geographic
     // coordinates ('EPSG:4326'), but the map is projected ('EPSG:3857').
     _homeLocation = new OpenLayers.Geometry.Point(-2.986221, 53.413420)
         .transform('EPSG:4326', 'EPSG:3857');
 
-    // We add the marker with a tooltip text to the overlay
-    _overlay.addFeatures([
-        new OpenLayers.Feature.Vector(_homeLocation, {tooltip: 'You are here'})
-    ]);
-
-    // A popup with some information about our location
-    var popup = new OpenLayers.Popup.FramedCloud("Popup",
-        _homeLocation.getBounds().getCenterLonLat(), null,
-        '<a target="_blank" href="http://openlayers.org/">We</a> ' +
-        'could be in Liverpool.<br>Or elsewhere.', null,
-        true // <-- true if we want a close (X) button, false otherwise
-    );
-
-    // Finally we create the map
+    // Create the map
     _map = new OpenLayers.Map({
         div: "map", projection: "EPSG:3857",
-        layers: [new OpenLayers.Layer.OSM(), _overlay],
+        layers: [new OpenLayers.Layer.OSM()],
         center: _homeLocation.getBounds().getCenterLonLat(), zoom: 6
     });
 
     updateFeatures();
-
-    // and add the popup to it.
-//    map.addPopup(popup);
-
 }
 
 // Do setup on ready...
@@ -160,7 +150,12 @@ $(document).ready(function(){
         }
   s.appendTo('#addCombo')
   $(document).on('change',"#combo", function(){
+
+    // Set new max distance
     _maxDistanceMiles = int(this.value);
+    // Clear current features
+    _map.removeLayer(_overlay);
+    // Update them...
     updateFeatures();
   });
 
