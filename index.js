@@ -69,7 +69,7 @@ function updateFeatures() {
 
     // The overlay layer for our marker, with a simple diamond as symbol
     _overlay = new ol.source.Vector('Overlay', {
-        styleMap: new StyleMap({
+        styleMap: new ol.Style.StyleMap({
             externalGraphic: 'img/marker.png',
             graphicWidth: 20, graphicHeight: 24, graphicYOffset: -24,
             title: '${tooltip}'
