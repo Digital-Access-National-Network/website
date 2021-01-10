@@ -6,17 +6,17 @@ var _scotlandSchoolData;
 var _englandSchoolData;
 
 var _homeLocation;
-var _distance = 10;
+var _maxDistanceMiles = 20;
 
 var _geographicProj  = new OpenLayers.Projection("EPSG:4326");
 var _mapProj  = new OpenLayers.Projection("EPSG:3857");
 var _mercatorProj = new OpenLayers.Projection("EPSG:900913");
 
 // Find distance between two points on the map
-function distanceBetweenPoints(p1Map, p2Map){
+function distanceBetweenPointsMiles(p1Map, p2Map){
   var p1Merc = p1Map.transform(_mapProj, _mercatorProj);
   var p2Merc = p2Map.transform(_mapProj, _mercatorProj);
-  return p1Merc.distanceTo(p2Merc);
+  return p1Merc.distanceTo(p2Merc) * 0.000621371;
 }
 
 // when jQuery has loaded the data, we can create features for each photo
@@ -41,22 +41,23 @@ function jsonSuccessHandler(data) {
     var thisLocation = new OpenLayers.Geometry.Point(parseFloat(item.LON), parseFloat(item.LAT)).transform('EPSG:4326', 'EPSG:3857');
 
 //    console.debug(thisLocation);
-    var distance = distanceBetweenPoints(_homeLocation, thisLocation);
+    var distanceMiles = distanceBetweenPointsMiles(_homeLocation, thisLocation);
 
-    var tiptext = ""
-    if( "SCHNAME" in item )
-      tiptext = item.SCHNAME;
-    else if( "Institution Name" in item )
-      tiptext = item["Institution Name"];
-    else if( "School Name" in item )
-      tiptext = item["School Name"];
+    if(distanceMiles < _maxDistanceMiles) {
+      var tiptext = ""
+      if( "SCHNAME" in item )
+        tiptext = item.SCHNAME;
+      else if( "Institution Name" in item )
+        tiptext = item["Institution Name"];
+      else if( "School Name" in item )
+        tiptext = item["School Name"];
 
-    tiptext = tiptext + " " + distance;
+      tiptext = tiptext + " " + distance;
 
-    _overlay.addFeatures([
-        new OpenLayers.Feature.Vector(thisLocation, {tooltip: tiptext})
-    ]);
-
+      _overlay.addFeatures([
+          new OpenLayers.Feature.Vector(thisLocation, {tooltip: tiptext})
+      ]);
+    }
 
   });
 }
