@@ -161,12 +161,13 @@ function initMap() {
         coord = evt.coordinate,
         address = evt.address;
 
-      _homeLocation = coord;
-
       // Clear current features
       _map.removeLayer(_overlay);
 
-      _map.getView().setCenter(_homeLocation);
+      _map.getView().setCenter(coord);
+
+      // Coordinates are in map projection so transform back to 4326 for home
+      _homeLocation = ol.proj.transform(coord, 'EPSG:3857', 'EPSG:4326')
 
       updateFeatures();
     })
