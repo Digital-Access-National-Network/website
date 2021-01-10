@@ -1,3 +1,13 @@
+import 'ol/ol.css';
+
+import Map from 'ol/Map';
+import OSM from 'ol/source/OSM';
+import Projection from 'ol/Projection';
+import Feature from 'ol/Feature';
+import Geometry from 'ol/geom/Geometry';
+import TileLayer from 'ol/layer/Tile';
+//import StyleMap form 
+
 var _map;
 var _overlay;
 
@@ -8,9 +18,9 @@ var _englandSchoolData;
 var _homeLocation;
 var _maxDistanceMiles = 20;
 
-var _geographicProj  = new ol.Projection("EPSG:4326");
-var _mapProj  = new ol.Projection("EPSG:3857");
-var _mercatorProj = new ol.Projection("EPSG:900913");
+var _geographicProj  = new Projection("EPSG:4326");
+var _mapProj  = new Projection("EPSG:3857");
+var _mercatorProj = new Projection("EPSG:900913");
 
 // Find distance between two points on the map
 //
@@ -34,14 +44,14 @@ function jsonSuccessHandler(data) {
   data.forEach(function(item) {
 
     // create a new feature with the item as the properties
-    var feature = new ol.Feature(item);
+    var feature = new Feature(item);
     // add a url property for later ease of access
 //    feature.set('url', item.media.m);
     // create an appropriate geometry and add it to the feature
 
 //    console.debug(item)
 
-    var thisLocation = new ol.Geometry.Point(parseFloat(item.LON), parseFloat(item.LAT)).transform('EPSG:4326', 'EPSG:3857');
+    var thisLocation = new Geometry.Point(parseFloat(item.LON), parseFloat(item.LAT)).transform('EPSG:4326', 'EPSG:3857');
 
 //    console.debug(thisLocation);
     var distanceMiles = distanceBetweenPointsMiles(_homeLocation, thisLocation);
@@ -68,8 +78,8 @@ function jsonSuccessHandler(data) {
 function updateFeatures() {
 
     // The overlay layer for our marker, with a simple diamond as symbol
-    _overlay = new ol.Layer.Vector('Overlay', {
-        styleMap: new ol.StyleMap({
+    _overlay = new Layer.Vector('Overlay', {
+        styleMap: new StyleMap({
             externalGraphic: 'img/marker.png',
             graphicWidth: 20, graphicHeight: 24, graphicYOffset: -24,
             title: '${tooltip}'
@@ -78,7 +88,7 @@ function updateFeatures() {
 
     // We add the marker with a tooltip text to the overlay
     _overlay.addFeatures([
-        new ol.Feature.Vector(_homeLocation, {tooltip: 'You are here'})
+        new Feature.Vector(_homeLocation, {tooltip: 'You are here'})
     ]);
 
     // TODO: Are these resources cached? Hope so...
@@ -125,13 +135,13 @@ function initMap() {
 
     // The location of our marker and popup. We usually think in geographic
     // coordinates ('EPSG:4326'), but the map is projected ('EPSG:3857').
-    _homeLocation = new ol.Geometry.Point(-2.986221, 53.413420)
+    _homeLocation = new Geometry.Point(-2.986221, 53.413420)
         .transform('EPSG:4326', 'EPSG:3857');
 
     // Create the map
-    _map = new ol.Map({
+    _map = new Map({
         div: "map", projection: "EPSG:3857",
-        layers: [new ol.Layer.OSM()],
+        layers: [new Layer.OSM()],
         center: _homeLocation.getBounds().getCenterLonLat(), zoom: 6
     });
 
