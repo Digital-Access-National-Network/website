@@ -131,7 +131,7 @@ function initMap() {
     // Create the map
     _map = new Map({
         div: "map", projection: "EPSG:3857",
-        layers: [new ol.Layer.OSM()],
+        layers: [new ol.source.OSM()],
         center: _homeLocation.getBounds().getCenterLonLat(), zoom: 6
     });
 
