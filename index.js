@@ -137,7 +137,7 @@ function initMap() {
           })
         ],
         view: new ol.View({
-          projection: "EPSG:4326",
+          projection: "EPSG:3857",
           center: ol.proj.fromLonLat([37.41, 8.82]),
           zoom: 6
         })
