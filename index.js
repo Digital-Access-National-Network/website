@@ -6,9 +6,9 @@ var _scotlandSchoolData;
 var _englandSchoolData;
 
 // when jQuery has loaded the data, we can create features for each photo
-function jsonSuccessHandler(data, target) {
+function jsonSuccessHandler(data) {
 
-  target = data;
+  this.indexValue.target = data;
 
   // we need to transform the geometries into the view's projection
 //  var transform = ol.proj.getTransform('EPSG:4326', 'EPSG:3857');
@@ -86,7 +86,8 @@ function init() {
     // pull json for NI
     $.ajax({
       url: 'resources/Northern_Ireland_Jan2021_latlon.json',
-      success: jsonSuccessHandler(data, _niSchoolData),
+      success: jsonSuccessHandler,
+      indexValue: { target:_niSchoolData },
       error: function () {
         alert("Error retrieving NI data");
       },
@@ -97,7 +98,8 @@ function init() {
     // pull json for Scotland
     $.ajax({
       url: 'resources/Scotland_Oct2020_open_latlon.json',
-      success: jsonSuccessHandler(data, _scotlandSchoolData),
+      success: jsonSuccessHandler,
+      indexValue: { target:_scotlandSchoolData },
       error: function () {
         alert("Error retrieving Scotland data");
       },
@@ -107,7 +109,8 @@ function init() {
     // pull json for England
     $.ajax({
       url: 'resources/England_2018_2019_latlon.json',
-      success: jsonSuccessHandler(data, _englandSchoolData),
+      success: jsonSuccessHandler,
+      indexValue: { target:_englandSchoolData },
       error: function () {
         alert("Error retrieving England data");
       },
