@@ -139,7 +139,7 @@ function initMap() {
 
     // Create the map
     _map = new ol.Map({
-        div: "map", projection: "EPSG:3857",
+        target: "map", projection: "EPSG:3857",
         layers: [
           new ol.layer.Tile({
             source: new ol.source.OSM()
