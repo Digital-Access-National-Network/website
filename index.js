@@ -13,6 +13,9 @@ var _mapProj  = new OpenLayers.Projection("EPSG:3857");
 var _mercatorProj = new OpenLayers.Projection("EPSG:900913");
 
 // Find distance between two points on the map
+//
+// TODO: I am not convinced that this is giving the right distances...
+//
 function distanceBetweenPointsMiles(p1Map, p2Map){
   var p1Merc = p1Map.transform(_mapProj, _mercatorProj);
   var p2Merc = p2Map.transform(_mapProj, _mercatorProj);
@@ -80,7 +83,7 @@ function init() {
 
     // We add the marker with a tooltip text to the overlay
     _overlay.addFeatures([
-        new OpenLayers.Feature.Vector(_homeLocation, {tooltip: 'OpenLayers'})
+        new OpenLayers.Feature.Vector(_homeLocation, {tooltip: 'You are here'})
     ]);
 
     // A popup with some information about our location
@@ -136,3 +139,25 @@ function init() {
       }
     });
 }
+
+// Do setup on ready...
+$(document).ready(function(){
+
+  // Setup distance combo
+  var data = { 'Country0': 'India', 'Country1': 'Sri Lanka', 'Country2': 'USA', 'Country3': 'Australia', 'Country4': 'Newzeland'};
+  var s = $('<select id="combo" />');
+        //iterate through each key/value in 'data' and create an option tag out of it
+        for(var val in data) {
+            $('<option />', {value: val, text: data[val]}).appendTo(s);
+        }
+  $("#addCombo").on('click', function() {
+            s.appendTo('p');
+        });
+  $(document).on('change',"#combo", function(){
+            alert(this.value);
+        });
+
+  init();
+
+});
+
