@@ -156,12 +156,13 @@ function initMap() {
     _map.addControl(geocoder);
 
     geocoder.on('addresschosen', function(evt){
+
       var feature = evt.feature,
         coord = evt.coordinate,
         address = evt.address;
-      // some popup solution
-      content.innerHTML = '<p>'+ address.formatted +'</p>';
-      _overlay.setPosition(coord);
+
+      _homeLocation = coord;
+      _overlay.setPosition(_homeLocation);
     })
 
     updateFeatures();
@@ -182,8 +183,10 @@ $(document).ready(function(){
 
     // Set new max distance
     _maxDistanceMiles = parseInt(this.value);
+
     // Clear current features
     _map.removeLayer(_overlay);
+
     // Update them...
     updateFeatures();
   });
