@@ -52,7 +52,7 @@ function jsonSuccessHandler(data) {
       else if( "School Name" in item )
         tiptext = item["School Name"];
 
-      tiptext = tiptext + " " + distance;
+      tiptext = tiptext + " " + distanceMiles;
 
       _overlay.addFeatures([
           new OpenLayers.Feature.Vector(thisLocation, {tooltip: tiptext})
