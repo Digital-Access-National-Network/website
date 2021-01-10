@@ -41,7 +41,7 @@ function jsonSuccessHandler(data) {
 
 //    console.debug(item)
 
-    var thisLocation = new ol.geom.Geometry.Point(parseFloat(item.LON), parseFloat(item.LAT)).transform('EPSG:4326', 'EPSG:3857');
+    var thisLocation = new ol.geom.Point(parseFloat(item.LON), parseFloat(item.LAT)).transform('EPSG:4326', 'EPSG:3857');
 
 //    console.debug(thisLocation);
     var distanceMiles = distanceBetweenPointsMiles(_homeLocation, thisLocation);
@@ -125,7 +125,7 @@ function initMap() {
 
     // The location of our marker and popup. We usually think in geographic
     // coordinates ('EPSG:4326'), but the map is projected ('EPSG:3857').
-    _homeLocation = new ol.geom.Geometry.Point(-2.986221, 53.413420)
+    _homeLocation = new ol.geom.Point(-2.986221, 53.413420)
         .transform('EPSG:4326', 'EPSG:3857');
 
     // Create the map
