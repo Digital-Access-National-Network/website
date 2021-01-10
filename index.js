@@ -38,7 +38,7 @@ function styleFunction(feature, resolution) {
         }),
         // get the text from the feature - `this` is ol.Feature
         // and show only under certain resolution
-        text: _map.getView().getZoom() > 14 ? feature.get('description') : ''
+        text: (_map.getView().getZoom() > 14) || (feature.get('hover') == true) ? feature.get('description') : ''
       }),
       image: new ol.style.Icon({
         anchor: [0.5, 46],
@@ -172,7 +172,7 @@ var displayFeatureInfo = function (pixel) {
         _highlighted.set('hover',false);
         _highlighted.setStyle(styleFunction);
       }
-      _highlighted = nulll;
+      _highlighted = null;
     }
   });
 }
