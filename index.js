@@ -167,7 +167,8 @@ var displayFeatureInfo = function (pixel) {
     } else {
       console.debug("nothing")
     }
-};
+  });
+}
 
 function initMap() {
 
