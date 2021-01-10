@@ -38,7 +38,7 @@ function jsonSuccessHandler(data) {
 
 //    console.debug(item)
 
-    var thiLocation = new OpenLayers.Geometry.Point(parseFloat(item.LON), parseFloat(item.LAT)).transform('EPSG:4326', 'EPSG:3857');
+    var thisLocation = new OpenLayers.Geometry.Point(parseFloat(item.LON), parseFloat(item.LAT)).transform('EPSG:4326', 'EPSG:3857');
 
 //    console.debug(thisLocation);
     var distance = distanceBetweenPoints(_homeLocation, thisLocation);
