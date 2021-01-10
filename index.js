@@ -28,8 +28,6 @@ function jsonSuccessHandler(data) {
   // we need to transform the geometries into the view's projection
 //  var transform = ol.proj.getTransform('EPSG:4326', 'EPSG:3857');
 
-  var homePoint = new ol.geom.Point( _homeLocation );
-
   // loop over the items in the response
   data.forEach(function(item) {
 
@@ -41,9 +39,7 @@ function jsonSuccessHandler(data) {
 
 //    console.debug(item)
 
-    var thisPoint = new ol.geom.Point(parseFloat(item.LON), parseFloat(item.LAT));
-
-    var distanceMiles = distanceBetweenPointsMiles(homePoint, thisPoint);
+    var distanceMiles = distanceBetweenPointsMiles(_homeLocation, [ item.LON, item.LAT] );
 
     console.debug(distanceMiles);
 
@@ -58,9 +54,11 @@ function jsonSuccessHandler(data) {
 
       tiptext = tiptext + " " + distanceMiles;
 
-      _overlay.addFeatures([
-          new olFeature.Vector(thisPoint, {tooltip: tiptext})
-      ]);
+      var marker = new ol.Feature({
+        geometry: new ol.geometry.point(ol.proj.transform([16.9071388, 52.4901917], 'EPSG:4326', 'EPSG:3857')),
+      });
+
+      _overlay.addFeature(marker);
     }
 
   });
