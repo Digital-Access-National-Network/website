@@ -152,7 +152,7 @@ $(document).ready(function(){
   $(document).on('change',"#combo", function(){
 
     // Set new max distance
-    _maxDistanceMiles = int(this.value);
+    _maxDistanceMiles = parseInt(this.value);
     // Clear current features
     _map.removeLayer(_overlay);
     // Update them...
