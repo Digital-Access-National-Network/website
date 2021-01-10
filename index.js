@@ -58,7 +58,7 @@ function jsonSuccessHandler(data) {
         geometry: new ol.geom.Point(ol.proj.transform([item.LON, item.LAT], 'EPSG:4326', 'EPSG:3857')),
       });
 
-      _overlay.addFeature(marker);
+      _overlay.source.addFeature(marker);
     }
 
   });
