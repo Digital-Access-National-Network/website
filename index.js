@@ -153,7 +153,8 @@ function initMap() {
       placeholder: 'Search for ...',
       targetType: 'text-input',
       limit: 5,
-      keepOpen: true
+      keepOpen: true,
+      preventDefault: true
     });
 
     _map.addControl(geocoder);
