@@ -163,7 +163,11 @@ function initMap() {
 
       _homeLocation = coord;
 
+      // Clear current features
+      _map.removeLayer(_overlay);
+
       _map.getView().setCenter(_homeLocation);
+
     })
 
     updateFeatures();
