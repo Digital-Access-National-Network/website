@@ -38,7 +38,13 @@ function styleFunction(feature, resolution) {
         }),
         // get the text from the feature - `this` is ol.Feature
         // and show only under certain resolution
-        text: _map.getView().getZoom() > 12 ? feature.get('description') : ''
+        text: _map.getView().getZoom() > 14 ? feature.get('description') : ''
+      }),
+      image: new ol.style.Icon({
+        anchor: [0.5, 46],
+        anchorXUnits: 'fraction',
+        anchorYUnits: 'pixels',
+        src: 'img/marker.png'
       })
     })
   ];
