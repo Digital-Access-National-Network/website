@@ -129,10 +129,10 @@ function initMap() {
         .transform('EPSG:4326', 'EPSG:3857');
 
     // Create the map
-    _map = new Map({
+    _map = new ol.Map({
         div: "map", projection: "EPSG:3857",
         layers: [new ol.source.OSM()],
-        center: _homeLocation.getCoordinates(), zoom: 6
+        center: _homeLocation, zoom: 6
     });
 
     var geocoder = new Geocoder('nominatim', {
