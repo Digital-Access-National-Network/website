@@ -135,6 +135,26 @@ function initMap() {
         center: _homeLocation.getBounds().getCenterLonLat(), zoom: 6
     });
 
+    var geocoder = new Geocoder('nominatim', {
+      provider: 'osm', //change it here
+      lang: 'en-GB',
+      placeholder: 'Search for ...',
+      targetType: 'text-input',
+      limit: 5,
+      keepOpen: true
+    });
+
+    _map.addControl(geocoder);
+
+    geocoder.on('addresschosen', function(evt){
+      var feature = evt.feature,
+        coord = evt.coordinate,
+        address = evt.address;
+      // some popup solution
+      content.innerHTML = '<p>'+ address.formatted +'</p>';
+      _overlay.setPosition(coord);
+    })
+
     updateFeatures();
 }
 
