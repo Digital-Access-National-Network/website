@@ -16,8 +16,7 @@ var _mercatorProj = new ol.proj.Projection("EPSG:900913");
 //
 // TODO: I am not convinced that this is giving the right distances...
 //
-function distanceBetweenPointsMiles(p1Map, p2Map){
-
+function distanceBetweenPointsMiles(p1, p2){
   return ol.sphere.getDistance(p1, p2) * 0.000621371;
 }
 
