@@ -68,13 +68,27 @@ function jsonSuccessHandler(data) {
 function updateFeatures() {
 
     // The overlay layer for our marker, with a simple diamond as symbol
-    _overlay = new ol.source.Vector('Overlay', {
-        styleMap: new ol.Style.StyleMap({
-            externalGraphic: 'img/marker.png',
-            graphicWidth: 20, graphicHeight: 24, graphicYOffset: -24,
-            title: '${tooltip}'
+    _overlay = new ol.layer.Vector({
+      source: new ol.source.Vector({
+        features: [iconFeature]
+      }),
+      style: new ol.style.Style({
+        image: new ol.style.Icon({
+          anchor: [0.5, 46],
+          anchorXUnits: 'fraction',
+          anchorYUnits: 'pixels',
+          src: 'https://openlayers.org/en/latest/examples/data/icon.png'
         })
-    });
+      })
+    })
+
+//new ol.source.Vector('Overlay', {
+//        styleMap: new ol.Style.StyleMap({
+//            externalGraphic: 'img/marker.png',
+//            graphicWidth: 20, graphicHeight: 24, graphicYOffset: -24,
+//            title: '${tooltip}'
+//        })
+//    });
 
     // We add the marker with a tooltip text to the overlay
     _overlay.addFeatures([
