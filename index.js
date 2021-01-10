@@ -8,9 +8,9 @@ var _englandSchoolData;
 var _homeLocation;
 var _maxDistanceMiles = 20;
 
-var _geographicProj  = new ol.Projection("EPSG:4326");
-var _mapProj  = new ol.Projection("EPSG:3857");
-var _mercatorProj = new ol.Projection("EPSG:900913");
+var _geographicProj  = new ol.proj.Projection("EPSG:4326");
+var _mapProj  = new ol.proj.Projection("EPSG:3857");
+var _mercatorProj = new ol.proj.Projection("EPSG:900913");
 
 // Find distance between two points on the map
 //
