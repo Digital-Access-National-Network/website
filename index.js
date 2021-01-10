@@ -13,7 +13,7 @@ var _mapProj  = new OpenLayers.Projection("EPSG:3857");
 var _mercatorProj = new OpenLayers.Projection("EPSG:900913");
 
 // Find distance between two points on the map
-function distanceBetweenPoints(p1, p2){
+function distanceBetweenPoints(p1Map, p2Map){
   var p1Merc = p1Map.transform(_mapProj, _mercatorProj);
   var p2Merc = p2Map.transform(_mapProj, _mercatorProj);
   return p1Merc.distanceTo(p2Merc);
