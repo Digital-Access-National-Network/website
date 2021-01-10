@@ -31,7 +31,7 @@ function styleFunction(feature, resolution) {
         width: 1.25
       }),
       text: new ol.style.Text({
-        font: '12px Calibri,sans-serif',
+        font: '14px Calibri,sans-serif',
         fill: new ol.style.Fill({ color: '#000' }),
         stroke: new ol.style.Stroke({
           color: '#fff', width: 2
