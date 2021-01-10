@@ -81,9 +81,10 @@ function jsonSuccessHandler(data) {
 
       var marker = new ol.Feature({
         geometry: new ol.geom.Point(ol.proj.transform([item.LON, item.LAT], 'EPSG:4326', 'EPSG:3857')),
-        description: tiptext,
-        style: styleFunction
+        description: tiptext
       });
+
+      marker.setStyle(styleFunction);
 
       _overlay.getSource().addFeature(marker);
     }
