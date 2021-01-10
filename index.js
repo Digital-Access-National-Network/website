@@ -54,7 +54,7 @@ function jsonSuccessHandler(data) {
     tiptext = tiptext + " " + distance;
 
     _overlay.addFeatures([
-        new OpenLayers.Feature.Vector(myLocation, {tooltip: tiptext})
+        new OpenLayers.Feature.Vector(thisLocation, {tooltip: tiptext})
     ]);
 
 
