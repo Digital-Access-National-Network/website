@@ -146,12 +146,12 @@ function initMap() {
           })
         ],
         view: new ol.View({
-          center: ol.proj.fromLonLat([37.41, 8.82]),
+          center: _homeLocation,
           zoom: 6
         })
     });
 
-//          center: _homeLocation,
+//          center: ol.proj.fromLonLat([37.41, 8.82]),
 
     var geocoder = new Geocoder('nominatim', {
       provider: 'osm', //change it here
