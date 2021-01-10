@@ -55,7 +55,7 @@ function jsonSuccessHandler(data) {
       tiptext = tiptext + " " + distanceMiles;
 
       var marker = new ol.Feature({
-        geometry: new ol.geometry.Point(ol.proj.transform([item.LON, item.LAT], 'EPSG:4326', 'EPSG:3857')),
+        geometry: new ol.geom.Point(ol.proj.transform([item.LON, item.LAT], 'EPSG:4326', 'EPSG:3857')),
       });
 
       _overlay.addFeature(marker);
