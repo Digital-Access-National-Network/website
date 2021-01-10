@@ -140,9 +140,18 @@ function initMap() {
     // Create the map
     _map = new ol.Map({
         div: "map", projection: "EPSG:3857",
-        layers: [new ol.source.OSM()],
-        center: _homeLocation, zoom: 6
+        layers: [
+          new ol.layer.Tile({
+            source: new ol.source.OSM()
+          })
+        ],
+        view: new ol.View({
+          center: _homeLocation,
+          zoom: 6
+        })
     });
+
+//          center: ol.proj.fromLonLat([37.41, 8.82]),
 
     var geocoder = new Geocoder('nominatim', {
       provider: 'osm', //change it here
