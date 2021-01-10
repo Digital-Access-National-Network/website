@@ -5,6 +5,20 @@ var _niSchoolData;
 var _scotlandSchoolData;
 var _englandSchoolData;
 
+var _homeLocation;
+var _distance = 10;
+
+var _geographicProj  = new OpenLayers.Projection("EPSG:4326");
+var _mapProj  = new OpenLayers.Projection("EPSG:3857");
+var _mercatorProj = new OpenLayers.Projection("EPSG:900913");
+
+// Find distance between two points on the map
+function distanceBetweenPoints(p1, p2){
+  var point1 = new OpenLayers.Geometry.Point(latlng1.lon, latlng1.lat).transform(_mapProj, _mercatorProj);
+  var point2 = new OpenLayers.Geometry.Point(latlng2.lon, latlng2.lat).transform(_mapProj, _mercatorProj);
+  return point1.distanceTo(point2);
+}
+
 // when jQuery has loaded the data, we can create features for each photo
 function jsonSuccessHandler(data) {
 
@@ -24,9 +38,10 @@ function jsonSuccessHandler(data) {
 
 //    console.debug(item)
 
-    var myLocation = new OpenLayers.Geometry.Point(parseFloat(item.LON), parseFloat(item.LAT)).transform('EPSG:4326', 'EPSG:3857');
+    var thiLocation = new OpenLayers.Geometry.Point(parseFloat(item.LON), parseFloat(item.LAT)).transform('EPSG:4326', 'EPSG:3857');
 
-    console.debug(myLocation);
+//    console.debug(thisLocation);
+    var distance = distanceBetweenPoints(_homeLocation, thisLocation);
 
     var tiptext = ""
     if( "SCHNAME" in item )
@@ -35,6 +50,8 @@ function jsonSuccessHandler(data) {
       tiptext = item["Institution Name"];
     else if( "School Name" in item )
       tiptext = item["School Name"];
+
+    tiptext = tiptext + " " + distance;
 
     _overlay.addFeatures([
         new OpenLayers.Feature.Vector(myLocation, {tooltip: tiptext})
@@ -57,17 +74,17 @@ function init() {
 
     // The location of our marker and popup. We usually think in geographic
     // coordinates ('EPSG:4326'), but the map is projected ('EPSG:3857').
-    var myLocation = new OpenLayers.Geometry.Point(-2.986221, 53.413420)
+    _homeLocation = new OpenLayers.Geometry.Point(-2.986221, 53.413420)
         .transform('EPSG:4326', 'EPSG:3857');
 
     // We add the marker with a tooltip text to the overlay
     _overlay.addFeatures([
-        new OpenLayers.Feature.Vector(myLocation, {tooltip: 'OpenLayers'})
+        new OpenLayers.Feature.Vector(_homeLocation, {tooltip: 'OpenLayers'})
     ]);
 
     // A popup with some information about our location
     var popup = new OpenLayers.Popup.FramedCloud("Popup",
-        myLocation.getBounds().getCenterLonLat(), null,
+        _homeLocation.getBounds().getCenterLonLat(), null,
         '<a target="_blank" href="http://openlayers.org/">We</a> ' +
         'could be in Liverpool.<br>Or elsewhere.', null,
         true // <-- true if we want a close (X) button, false otherwise
@@ -77,7 +94,7 @@ function init() {
     _map = new OpenLayers.Map({
         div: "map", projection: "EPSG:3857",
         layers: [new OpenLayers.Layer.OSM(), _overlay],
-        center: myLocation.getBounds().getCenterLonLat(), zoom: 6
+        center: _homeLocation.getBounds().getCenterLonLat(), zoom: 6
     });
 
     // and add the popup to it.
