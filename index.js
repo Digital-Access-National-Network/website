@@ -14,9 +14,9 @@ var _mercatorProj = new OpenLayers.Projection("EPSG:900913");
 
 // Find distance between two points on the map
 function distanceBetweenPoints(p1, p2){
-  var point1 = new OpenLayers.Geometry.Point(latlng1.lon, latlng1.lat).transform(_mapProj, _mercatorProj);
-  var point2 = new OpenLayers.Geometry.Point(latlng2.lon, latlng2.lat).transform(_mapProj, _mercatorProj);
-  return point1.distanceTo(point2);
+  var p1Merc = p1Map.transform(_mapProj, _mercatorProj);
+  var p2Merc = p2Map.transform(_mapProj, _mercatorProj);
+  return p1Merc.distanceTo(p2Merc);
 }
 
 // when jQuery has loaded the data, we can create features for each photo
