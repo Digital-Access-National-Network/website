@@ -37,12 +37,13 @@ function jsonSuccessHandler(data) {
 //    feature.set('url', item.media.m);
     // create an appropriate geometry and add it to the feature
 
-//    console.debug(item)
+    console.debug(item)
 
     var thisLocation = new ol.geom.Point(parseFloat(item.LON), parseFloat(item.LAT));
 
-//    console.debug(thisLocation);
     var distanceMiles = distanceBetweenPointsMiles(_homeLocation, thisLocation);
+
+    console.debug(distanceMiles);
 
     if(distanceMiles < _maxDistanceMiles) {
       var tiptext = ""
