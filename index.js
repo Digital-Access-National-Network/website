@@ -12,14 +12,20 @@ var _geographicProj  = new ol.proj.Projection("EPSG:4326");
 var _mapProj  = new ol.proj.Projection("EPSG:3857");
 var _mercatorProj = new ol.proj.Projection("EPSG:900913");
 
+var wgs84Sphere = new ol.Sphere(6378137);
+
 // Find distance between two points on the map
 //
 // TODO: I am not convinced that this is giving the right distances...
 //
 function distanceBetweenPointsMiles(p1Map, p2Map){
-  var p1Merc = p1Map.transform(_mapProj, _mercatorProj);
-  var p2Merc = p2Map.transform(_mapProj, _mercatorProj);
-  return p1Merc.distanceTo(p2Merc) * 0.000621371;
+
+  // todo: Could use
+  // var sourceProj = map.getView().getProjection();
+
+  var p1 = p1Map.transform(_mapProj, _geographicProj);
+  var p2 = p2Map.transform(_mapProj, _geographicProj);
+  return wgs84Sphere.haversineDistance(p1, p2) * 0.000621371;
 }
 
 // when jQuery has loaded the data, we can create features for each photo
