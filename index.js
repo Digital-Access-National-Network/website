@@ -152,7 +152,7 @@ function initMap() {
 $(document).ready(function(){
 
   // Setup distance combo
-  var data = { '5': '1m', '1m': '5m', '5': '5m', '10': '10m', '25': '25m'};
+  var data = { '1': '1m', '1m': '5m', '5': '5m', '10': '10m', '25': '25m'};
   var s = $('<select id="combo" />');
         //iterate through each key/value in 'data' and create an option tag out of it
         for(var val in data) {
