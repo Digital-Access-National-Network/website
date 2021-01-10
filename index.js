@@ -68,7 +68,7 @@ function updateFeatures() {
 
     // We add the marker with a tooltip text to the overlay
     var homeFeature = new ol.Feature(
-	ol.proj.transform(_homeLocation, 'EPSG:4326', 'EPSG:3857')
+	ol.proj.transform(_homeLocation, 'EPSG:4326', 'EPSG:3857'),
 	{tooltip: 'You are here'}
     );
 
