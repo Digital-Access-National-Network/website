@@ -168,6 +168,7 @@ function initMap() {
 
       _map.getView().setCenter(_homeLocation);
 
+      updateFeatures();
     })
 
     updateFeatures();
