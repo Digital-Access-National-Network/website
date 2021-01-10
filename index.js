@@ -20,7 +20,7 @@ function distanceBetweenPointsMiles(p1, p2){
   return ol.sphere.getDistance(p1, p2) * 0.000621371;
 }
 
-function styleFunction() {
+function styleFunction(feature, resolution) {
   return [
     new ol.style.Style({
         fill: new ol.style.Fill({
@@ -38,7 +38,7 @@ function styleFunction() {
         }),
         // get the text from the feature - `this` is ol.Feature
         // and show only under certain resolution
-        text: _map.getView().getZoom() > 12 ? this.get('description') : ''
+        text: _map.getView().getZoom() > 12 ? feature.get('description') : ''
       })
     })
   ];
