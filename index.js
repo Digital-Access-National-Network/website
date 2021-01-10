@@ -109,7 +109,7 @@ function init() {
     // pull json for England
     $.ajax({
       url: 'resources/England_2018_2019_latlon.json',
-      success: jsonSuccessHandler(data, _englandSchoolData,
+      success: jsonSuccessHandler(data, _englandSchoolData),
       error: function () {
         alert("Error retrieving England data");
       },
