@@ -144,18 +144,16 @@ function init() {
 $(document).ready(function(){
 
   // Setup distance combo
-  var data = { 'Country0': 'India', 'Country1': 'Sri Lanka', 'Country2': 'USA', 'Country3': 'Australia', 'Country4': 'Newzeland'};
+  var data = { '5': '1m', '1m': '5m', '5': '5m', '10': '10m', '25': '25m'};
   var s = $('<select id="combo" />');
         //iterate through each key/value in 'data' and create an option tag out of it
         for(var val in data) {
             $('<option />', {value: val, text: data[val]}).appendTo(s);
         }
-  $("#addCombo").on('click', function() {
-            s.appendTo('p');
-        });
+  s.appendTo('#addCombo')
   $(document).on('change',"#combo", function(){
             alert(this.value);
-        });
+  });
 
   init();
 
