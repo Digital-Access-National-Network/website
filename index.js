@@ -87,7 +87,7 @@ function jsonSuccessHandler(data) {
 
       var marker = new ol.Feature({
         geometry: new ol.geom.Point(ol.proj.transform([item.LON, item.LAT], 'EPSG:4326', 'EPSG:3857')),
-        description: tiptext
+        name: tiptext
       });
 
       marker.setStyle(styleFunction);
@@ -120,8 +120,6 @@ function updateFeatures() {
         })
       })
     })
-
-    // TODO: Are these resources cached? Hope so...
 
     // pull json for NI
     $.ajax({
@@ -161,6 +159,16 @@ function updateFeatures() {
     });
 }
 
+var displayFeatureInfo = function (pixel) {
+    _overlay.getFeatures(pixel).then(function (features) {
+    var feature = features.length ? features[0] : undefined;
+    if (features.length) {
+      console.debug(feature.get('name')
+    } else {
+      console.debug("nothing")
+    }
+};
+
 function initMap() {
 
     // The location of our marker and popup. Coordinates ('EPSG:4326')
@@ -180,6 +188,18 @@ function initMap() {
           zoom: 6
         })
     });
+
+    _map.on('pointermove', function (evt) {
+      if (evt.dragging) {
+      return;
+      }
+      var pixel = _map.getEventPixel(evt.originalEvent);
+      displayFeatureInfo(pixel);
+    });
+
+map.on('click', function (evt) {
+  displayFeatureInfo(evt.pixel);
+});
 
     var geocoder = new Geocoder('nominatim', {
       provider: 'osm', //change it here
