@@ -163,9 +163,9 @@ var displayFeatureInfo = function (pixel) {
     _overlay.getFeatures(pixel).then(function (features) {
     var feature = features.length ? features[0] : undefined;
     if (features.length) {
-      console.debug(feature.get('name')
+      console.debug(feature.get('name'));
     } else {
-      console.debug("nothing")
+      console.debug("nothing");
     }
   });
 }
