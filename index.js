@@ -68,7 +68,7 @@ function jsonSuccessHandler(data) {
 function updateFeatures() {
 
     // The overlay layer for our marker, with a simple diamond as symbol
-    _overlay = new ol.Layer.Vector('Overlay', {
+    _overlay = new ol.source.Vector('Overlay', {
         styleMap: new StyleMap({
             externalGraphic: 'img/marker.png',
             graphicWidth: 20, graphicHeight: 24, graphicYOffset: -24,
@@ -78,7 +78,7 @@ function updateFeatures() {
 
     // We add the marker with a tooltip text to the overlay
     _overlay.addFeatures([
-        new Feature.Vector(_homeLocation, {tooltip: 'You are here'})
+        new ol.feature.Vector(_homeLocation, {tooltip: 'You are here'})
     ]);
 
     // TODO: Are these resources cached? Hope so...
